@@ -1,0 +1,662 @@
+/*==============================
+ROOT + RESET + BODY
+==============================*/
+
+:root{
+  --background:#f8f2ee;
+  --surface:#fffdfb;
+  --cream:#fff8f2;
+  --wine:#6b2737;
+  --wine-deep:#3d1622;
+  --rose:#c97b84;
+  --rose-soft:#e8a5ad;
+  --blush:#f6d6dc;
+  --gold:#d4af37;
+  --gold-soft:#f4d9a6;
+  --peach:#e79a72;
+  --text:#3d2b2f;
+  --text-light:#7b6a6e;
+  --border:rgba(212,175,55,.28);
+  --shadow:0 20px 50px rgba(107,39,55,.14);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+  color:#fff;
+  min-height:100vh;
+  overflow-x:hidden;
+  position:relative;
+
+  /* One coherent sunset arc, all pulled from the wine/rose/gold palette
+     used across the buttons & cards — instead of an unrelated
+     navy-to-violet-to-magenta rainbow. */
+  background:
+    radial-gradient(circle at 12% 18%, rgba(244,217,166,.20) 0%, transparent 30%),
+    radial-gradient(circle at 85% 12%, rgba(232,165,173,.28) 0%, transparent 32%),
+    radial-gradient(circle at 20% 85%, rgba(201,123,132,.30) 0%, transparent 38%),
+    radial-gradient(circle at 90% 80%, rgba(212,175,55,.18) 0%, transparent 30%),
+    linear-gradient(150deg,
+      var(--wine-deep) 0%,
+      #5a1f34 22%,
+      var(--wine) 42%,
+      #a8455a 62%,
+      var(--peach) 84%,
+      var(--gold-soft) 100%);
+  background-attachment:fixed;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:url("https://www.transparenttextures.com/patterns/stardust.png");
+  opacity:.06;
+  z-index:-1;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:radial-gradient(circle at center, transparent 30%, rgba(0,0,0,.22));
+  z-index:-1;
+}
+
+#particles{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+}
+
+a{ text-decoration:none; color:inherit; }
+img{ display:block; max-width:100%; }
+section{ padding:100px 0; position:relative; z-index:2; }
+
+
+/*==============================
+NAVBAR
+==============================*/
+
+#navbar{
+  background: rgba(61,22,34,.92); /* Wine color */
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(212,175,55,.25);
+  transition: all .35s ease;
+}
+
+
+#navToggle{ cursor:pointer; }
+
+#navLinks{
+  align-items:center;
+}
+
+@media(max-width:767px){
+  #navLinks{
+    position:absolute;
+    top:100%;
+    left:0;
+    width:100%;
+    flex-direction:column;
+    background:rgba(61,22,34,.96);
+    backdrop-filter:blur(18px);
+    padding:0;
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .4s ease, padding .4s ease;
+  }
+  #navLinks.mobile-open{
+    display:flex;
+    max-height:300px;
+    padding:20px 0;
+    gap:18px !important;
+  }
+}
+
+.navlink{
+  position:relative;
+  font-weight:500;
+  color:#fff;
+  transition:.3s;
+  padding:6px 0;
+}
+
+.navlink::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-6px;
+  width:0;
+  height:2px;
+  background:var(--gold);
+  transition:.35s;
+}
+
+.navlink:hover::after,
+.active-nav::after{
+  width:100%;
+}
+
+.navlink-dark{ color:var(--wine); }
+
+/*==============================
+HERO
+==============================*/
+
+.hero-content{ max-width:850px; position:relative; z-index:2; }
+
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3rem,8vw,6rem);
+  font-weight:900;
+  line-height:1.1;
+  color:#fff;
+  text-shadow:0 8px 30px rgba(0,0,0,.28);
+}
+
+.hero-title span{
+  background:linear-gradient(135deg,var(--gold),#fff5d6);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.hero-subtitle{
+  font-size:1.15rem;
+  line-height:2;
+  color:#f8f1f2;
+  max-width:720px;
+  margin:auto;
+}
+
+/*==============================
+BUTTONS
+==============================*/
+
+.hero-btn,.next{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:14px 34px;
+  border:none;
+  border-radius:50px;
+  font-weight:600;
+  font-size:1rem;
+  cursor:pointer;
+  background:linear-gradient(135deg,var(--rose),var(--gold));
+  color:#fff;
+  box-shadow:0 12px 30px rgba(201,123,132,.32);
+  transition:.35s;
+}
+
+.hero-btn:hover,
+.next:hover{
+  transform:translateY(-5px);
+  box-shadow:0 18px 40px rgba(201,123,132,.42);
+}
+
+.hero-btn:disabled{ opacity:.75; cursor:default; transform:none; }
+
+.glass-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px 30px;
+  border-radius:50px;
+  background:rgba(255,255,255,.45);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.5);
+  color:var(--wine);
+  font-weight:600;
+  transition:.35s;
+  cursor:pointer;
+}
+
+.glass-btn:hover{
+  background:#fff;
+  transform:translateY(-4px);
+}
+
+/*==============================
+GLASS CARD
+==============================*/
+
+.glass-card{
+  background: linear-gradient(
+    145deg,
+    #fffdfc 0%,
+    #fff8f2 50%,
+    #fce9eb 100%
+  );
+
+  border:2px solid rgba(212,175,55,.25);
+  border-radius:28px;
+  padding:44px 32px;
+
+  box-shadow:0 20px 50px rgba(61,22,34,.15);
+
+  transition:.35s;
+  color:var(--text);
+}
+
+.glass-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 30px 60px rgba(107,39,55,.18);
+}
+
+/*==============================
+HEADINGS (shared across sections)
+==============================*/
+
+.title,.heading,.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.4rem,5vw,3.6rem);
+  color:var(--wine);
+  text-align:center;
+  margin-bottom:10px;
+}
+
+/* headings that sit on the dark hero-colored background (glass-card
+   sections still use the wine color since the card itself is light) */
+
+/*==============================
+COUNTDOWN
+==============================*/
+
+#countdown > div{
+  position: relative;
+  padding: clamp(16px, 3vw, 28px);
+  border-radius: 22px;
+
+  /* Elegant solid gradient */
+  background: linear-gradient(135deg,
+      #6b2737 0%,
+      #8b3a4b 55%,
+      #c97b84 100%);
+
+  border: 2px solid rgba(244,217,166,.5);
+  box-shadow:
+      0 15px 35px rgba(61,22,34,.35),
+      inset 0 1px 0 rgba(255,255,255,.15);
+
+  text-align: center;
+  transition: all .35s ease;
+}
+
+#countdown > div:hover{
+  transform: translateY(-8px) scale(1.03);
+  box-shadow:
+      0 22px 45px rgba(61,22,34,.45),
+      0 0 25px rgba(212,175,55,.25);
+}
+
+.count-number{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,5vw,3rem);
+  font-weight:700;
+  background:linear-gradient(135deg,var(--wine),var(--rose));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+#countdown p{
+  margin-top:8px;
+  font-size:.85rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--text-light);
+}
+#countdown-section .glass-card{
+    background: linear-gradient(
+        135deg,
+        #6b2737 0%,
+        #8b3a4b 55%,
+        #c97b84 100%
+    );
+    border: 1px solid rgba(244,217,166,.4);
+    color: white;
+}
+
+.confettiBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*==============================
+LOVE NOTES
+==============================*/
+
+.notes-grid,.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:30px;
+  margin-top:20px;
+}
+
+.note{
+  height:220px;
+  perspective:1200px;
+  cursor:pointer;
+}
+
+.note-inner{
+  position:relative;
+  width:100%;
+  height:100%;
+  transform-style:preserve-3d;
+  transition:transform .8s;
+}
+
+.note:hover .note-inner,
+.note.open .note-inner{
+  transform:rotateY(180deg);
+}
+
+.note-front,
+.note-back{
+  position:absolute;
+  inset:0;
+  border-radius:22px;
+  padding:24px;
+  backface-visibility:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  border:1px solid var(--border);
+}
+
+.note-front{
+  background:linear-gradient(145deg,#fffaf5,#f8ede7);
+  color:var(--wine);
+  font-family:'Playfair Display',serif;
+  font-size:1.3rem;
+  font-weight:600;
+}
+
+.note-back{
+  background:linear-gradient(145deg,#fffdfb,#fff5ef);
+  color:var(--text);
+  transform:rotateY(180deg);
+  font-size:1rem;
+  line-height:1.75;
+}
+
+/*==============================
+BIRTHDAY CARDS
+==============================*/
+
+.card{
+  position:relative;
+  width:100%;
+  max-width:340px;
+  margin:auto;
+  background:#fff;
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 20px 50px rgba(0,0,0,.14);
+  border:1px solid rgba(255,255,255,.6);
+  transition:.4s;
+  cursor:pointer;
+}
+
+.card:hover{
+  transform:translateY(-10px) scale(1.02);
+  box-shadow:0 30px 70px rgba(107,39,55,.22);
+}
+
+.card-visual{
+  aspect-ratio:4/5;
+  background:linear-gradient(160deg,#faf7f4,#f2e5da);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:12px;
+}
+
+.card-visual img{
+  width:100%;
+  height:100%;
+  display:block;
+  border-radius:18px;
+  object-fit:cover;
+  transition:.4s;
+}
+
+.card:hover .card-visual img{ transform:scale(1.05); }
+
+.overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+  text-align:center;
+  padding:25px;
+  background:linear-gradient(to top,
+    rgba(61,22,34,.85),
+    rgba(61,22,34,.2),
+    transparent);
+  color:#fff;
+  opacity:0;
+  transition:.35s;
+}
+
+.card:hover .overlay{ opacity:1; }
+
+.overlay h2{
+  font-family:'Playfair Display',serif;
+  font-size:1.7rem;
+  margin-bottom:6px;
+}
+
+.overlay p{
+  font-size:.9rem;
+  letter-spacing:1px;
+  opacity:.9;
+}
+
+/*==============================
+CARD MODAL
+==============================*/
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(61,22,34,.7);
+  backdrop-filter:blur(6px);
+  opacity:0;
+  visibility:hidden;
+  transition:.35s;
+}
+
+.modal.open{
+  opacity:1;
+  visibility:visible;
+}
+
+.modal-content{
+  position:relative;
+  background:var(--surface);
+  border-radius:26px;
+  max-width:520px;
+  width:90%;
+  max-height:85vh;
+  overflow-y:auto;
+  padding:40px 32px 32px;
+  box-shadow:0 30px 80px rgba(0,0,0,.35);
+  transform:scale(.9) translateY(20px);
+  transition:.35s;
+}
+
+.modal.open .modal-content{
+  transform:scale(1) translateY(0);
+}
+
+.modal .close{
+  position:absolute;
+  top:16px;
+  right:20px;
+  font-size:1.8rem;
+  line-height:1;
+  color:var(--text-light);
+  cursor:pointer;
+  transition:.25s;
+}
+
+.modal .close:hover{ color:var(--wine); }
+
+.modal-visual{
+  border-radius:18px;
+  overflow:hidden;
+  margin-bottom:24px;
+  box-shadow:0 12px 30px rgba(0,0,0,.15);
+}
+
+.modal-visual img{ width:100%; height:auto; object-fit:cover; }
+
+.modal .quote{
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;
+  font-style:italic;
+  color:var(--wine);
+  text-align:center;
+  line-height:1.7;
+}
+
+/*==============================
+MEMORIES
+==============================*/
+
+.timeline{
+  position:relative;
+  max-width:900px;
+  margin:60px auto 0;
+  padding-left:30px;
+  font-weight: bold;
+}
+
+.timeline::before{
+  content:"";
+  position:absolute;
+  left:15px;
+  top:0;
+  width:4px;
+  height:100%;
+  background:linear-gradient(var(--rose),var(--gold));
+  border-radius:10px;
+}
+
+.memory{
+  position:relative;
+  margin-bottom:35px;
+}
+
+.memory-dot{
+  position:absolute;
+  left:-30px;
+  top:28px;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--rose),var(--wine));
+  box-shadow:0 8px 20px rgba(201,123,132,.4), 0 0 0 5px rgba(255,255,255,.85);
+  z-index:2;
+}
+
+.memory-card{
+  position:relative;
+  margin-left:35px;
+  background:linear-gradient(145deg,#fffdfb,#f8efe9);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:28px;
+  box-shadow:var(--shadow);
+  transition:.35s;
+  color:var(--text);
+}
+
+.memory-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 25px 60px rgba(107,39,55,.16);
+}
+
+.memory-year{
+  display:inline-block;
+  font-family:'Poppins',sans-serif;
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:#fff;
+  background:linear-gradient(135deg,var(--rose),var(--gold));
+  padding:5px 14px;
+  border-radius:50px;
+  margin-bottom:12px;
+}
+
+.memory-card h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;
+  color:var(--wine);
+  margin-bottom:10px;
+}
+
+.memory-card p{
+  color:var(--text-light);
+  line-height:1.85;
+}
+
+.memory-img{
+  width:100%;
+  border-radius:18px;
+  margin-top:18px;
+  object-fit:cover;
+  box-shadow:0 10px 25px rgba(0,0,0,.1);
+}
+
+/*==============================
+FOOTER
+==============================*/
+
+footer{
+  position:relative;
+  z-index:2;
+  text-align:center;
+}
+
+footer p{
+  font-size:.95rem;
+  letter-spacing:.5px;
+}
+
+/*==============================
+RESPONSIVE
+==============================*/
+
+@media(max-width:768px){
+
+  .timeline{ padding-left:18px; }
+  .timeline::before{ left:8px; }
+  .memory-card{ margin-left:22px; padding:22px; }
+  .memory-dot{ left:-25px; }
+
+  .modal-content{ padding:32px 22px 26px; }
+}
