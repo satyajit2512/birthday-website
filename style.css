@@ -327,10 +327,33 @@ COUNTDOWN
     color: white;
 }
 
-.confettiBtn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.celebrate-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:16px 42px;
+
+    font-size:1.05rem;
+    font-weight:600;
+    color:#fff;
+
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+
+    background:linear-gradient(
+        135deg,
+        #ff6b81,
+        #d63384,
+        #6b2737
+    );
+
+    box-shadow:
+        0 12px 30px rgba(214,51,132,.35);
+
+    transition:all .35s ease;
+    
 }
 /*==============================
 LOVE NOTES
@@ -398,6 +421,7 @@ LOVE NOTES
 /*==============================
 BIRTHDAY CARDS
 ==============================*/
+
 
 .card{
   position:relative;

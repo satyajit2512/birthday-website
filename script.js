@@ -6,22 +6,22 @@ const navToggle=document.getElementById("navToggle");
 const navLinks=document.getElementById("navLinks");
 
 if(navToggle&&navLinks){
-navToggle.addEventListener("click",()=>{
-navLinks.classList.toggle("mobile-open");
+        navToggle.addEventListener("click",()=>{
+        navLinks.classList.toggle("mobile-open");
 });
 }
 
 /* SMOOTH NAVIGATION */
 
 document.querySelectorAll('a[href^="#"]').forEach(link=>{
-link.addEventListener("click",e=>{
-e.preventDefault();
+        link.addEventListener("click",e=>{
+        e.preventDefault();
 
 const target=document.querySelector(link.getAttribute("href"));
 
 if(target){
-target.scrollIntoView({
-behavior:"smooth"
+    target.scrollIntoView({
+    behavior:"smooth"
 });
 }
 
@@ -69,7 +69,7 @@ const now=new Date();
 let birthday=new Date(
 now.getFullYear(),
 7,
-3,
+2,
 0,
 0,
 0
